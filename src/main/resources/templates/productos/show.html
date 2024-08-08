@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaft.org">
 
 <head>
 
@@ -12,51 +12,20 @@
 
 
   <!-- Bootstrap core CSS -->
-  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link th:href="@{vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link href="../css/heroic-features.css" rel="stylesheet">
+  <link th:href="@{css/heroic-features.css}" rel="stylesheet">
 
 </head>
 
 <body>
 
   <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-      <a class="navbar-brand" href="#">Spring eCommerce</a>
-
-      <form class="form-inline my-2 my-lg-0" method="post"
-      action="#">
-      <input class="form-control mr-sm-2" type="search"
-      placeholder="Buscar" aria-label="Search" name="nombre"
-      autocomplete="off">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-    </form>
+  <div th:include="administrador/template_admin.html::header"></div>
 
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarResponsive">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item dropdown"><a
-          class="nav-link dropdown-toggle" href="#"
-          id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false"> ADMIN </a>
-          <div class="dropdown-menu"
-          aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">Productos</a> <a
-          class="dropdown-item" href="#">Ordenes</a> <a
-          class="dropdown-item" href="#">Usuarios</a> <a
-          class="dropdown-item" href="#">Salir</a>
-        </div></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-<!-- Page Content -->
+  <!-- Page Content -->
 <div class="container">
 
 
@@ -70,7 +39,7 @@
     <li class="breadcrumb-item active">Ver Productos</li>
   </ol>
 
-  <a class="btn btn-primary" href="#" > Crear Producto</a>
+  <a class="btn btn-primary" th:href="@{/productos/create}" > Crear Producto</a>
   <h2>Productos</h2>
   <table class="table">
     <thead>
@@ -84,13 +53,13 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td ></td>
-        <td ></td>
-        <td ></td>
-        <td ></td>
-        <td><a  class="btn btn-warning" href="">Editar</a> </td>
-        <td><a  class="btn btn-danger" href="">Eliminar</a> </td>
+      <tr th:each = "producto:${productos}">
+        <td th:text="${producto.nombre}"></td>
+        <td th:text="${producto.descripcion}"></td>
+        <td th:text="${producto.cantidad}"></td>
+        <td th:text="${producto.precio}"></td>
+        <td><a  class="btn btn-warning" th:href="@{productos/edit/{id} (id=${producto.id}) }">Editar</a> </td>
+        <td><a  class="btn btn-danger" th:href="@{productos/delete/{id} (id=${producto.id}) }">Eliminar</a> </td>
       </tr>       
     </tbody>
   </table>
@@ -99,16 +68,12 @@
 <!-- /.container -->
 
 <!-- Footer -->
-<footer class="py-5 bg-dark">
-  <div class="container">
-    <p class="m-0 text-center text-white">Copyright &copy; Spring eCommerce 2020</p>
-  </div>
-  <!-- /.container -->
-</footer>
+  <div th:include="administrador/template_admin.html::footer"></div>
 
-<!-- Bootstrap core JavaScript -->
-<script src="../vendor/jquery/jquery.min.js"></script>
-<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Bootstrap core JavaScript -->
+  <script th:src="@{vendor/jquery/jquery.min.js}"></script>
+  <script th:src="@{vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 
 </body>
 
