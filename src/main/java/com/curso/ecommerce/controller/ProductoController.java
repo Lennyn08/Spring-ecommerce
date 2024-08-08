@@ -74,8 +74,8 @@ public class ProductoController {
         p = productoService.get(producto.getId()).get();
 
         if (file.isEmpty()) { // Cuando editamos el producto pero no cambiamos la imagen
-            
             producto.setImagen(p.getImagen());
+        }else {  
             // Eliminar cuando no sea la imagen por defecto
             if (!p.getImagen().equals("default.jpg")) {
                 upload.deleteImage(p.getImagen());
@@ -88,6 +88,7 @@ public class ProductoController {
         productoService.update(producto);
         return "redirect:/productos";
     }
+
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable Integer id) {
